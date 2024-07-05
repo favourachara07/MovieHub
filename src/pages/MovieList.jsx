@@ -1,0 +1,22 @@
+/* eslint-disable react/prop-types */
+import { Card } from "../components/Card";
+import { useAxios, useTitle } from "../hooks";
+
+export const MovieList = ({ apiPath, title }) => {
+    //  the below resembles something liek: const {id, title, overview, poster_path}=movie
+    // useAxios("...") calls the custom hook, which fetches the data from the API and returns an object with a data property, { data: movies } destructures the object, taking the data property and renaming it to movies.
+    const { data: movies } = useAxios(apiPath)
+    // page title
+    useTitle(title)
+    return (
+        <main>
+            <section className="max-w-7xl mx-auto py-7">
+                <div className="flex justify-start flex-wrap other:justify-evenly">
+                    {movies.map((movie) => (
+                        <Card key={movie.id} movie={movie} />
+                    ))}
+                </div>
+            </section>
+        </main>
+    );
+};

@@ -5,7 +5,7 @@ import axios from "axios";
 export const useAxios = (apiPath, queryTerm = "") => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const apiKey = import.meta.env.TMDB_API_KEY;
+  const apiKey = process.env.TMDB_API_KEY;
   const url = `https://api.themoviedb.org/3/${apiPath}?api_key=${apiKey}&query=${queryTerm}`;
 
   useEffect(() => {

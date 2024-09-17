@@ -4,7 +4,10 @@ import './App.css'
 import { useState } from "react"
 
 export const App = () => {
-  const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") || false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const storedDarkMode = sessionStorage.getItem("darkMode");
+    return storedDarkMode !== null ? JSON.parse(storedDarkMode) : false;
+  });  
 
   return (
     <div>

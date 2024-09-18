@@ -39,3 +39,4 @@ export const useAxios = (apiPath, queryTerm = "") => {
   
   return { data, loading, error };
 };
+

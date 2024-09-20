@@ -1,5 +1,5 @@
 # React + Vite
-This is MovieHub, a platform to get information about movie and series. View movies that are popular, top-rated,upcoming. You can also search for a movie you are looking for
+This is MovieHub, a platform to get information about movie and series. View movies that are popular, top-rated,upcoming. You can also search for a movie you are looking for. Have fun
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

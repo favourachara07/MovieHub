@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom"
 import Logo from "../assets/react.svg"
 import Sun from "../assets/sun-fill.svg"
 import Moon from "../assets/moon-fill.svg"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [hidden, setHidden] = useState(true)
@@ -19,6 +19,11 @@ export const Header = ({ darkMode, setDarkMode }) => {
     }
   }, [darkMode]);
   
+  // ref to select dom elements: useeffect here is used to add the dom element to the ref cos it executes after the dom has been loaded cos our ref contains a dom element. it is the best place for a ref stroing a dom element
+  const inputEl=useRef(null)
+  useEffect(function() {
+    inputEl.current.focus()
+  },[]) 
 
   const activeClass = 'text-base block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
   const inActiveClass = 'text-base block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
@@ -58,7 +63,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
                 <span className="sr-only">Search icon</span>
               </div>
               <form onSubmit={handleSubmit}>
-                <input type="text" name="search" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." autoComplete="off" />
+                <input type="text" name="search" ref={inputEl} id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." autoComplete="off" />
               </form>
             </div>
             <button onClick={() => setHidden(!hidden)} data-collapse-toggle="navbar-search" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">

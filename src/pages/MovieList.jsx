@@ -4,7 +4,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import Loader from "../components/Loader";
 import { useAxios, useTitle } from "../hooks";
 
-export const MovieList = ({ apiPath, title }) => {
+const MovieList = ({ apiPath, title }) => {
     // reference:
     //  the below resembles something liek: const {id, title, overview, poster_path}=movie
     // useAxios("...") calls the custom hook, which fetches the data from the API and returns an object with a data property, { data: movies } destructures the object, taking the data property and renaming it to movies.
@@ -26,3 +26,4 @@ export const MovieList = ({ apiPath, title }) => {
         </main>
     );
 };
+export default MovieList;

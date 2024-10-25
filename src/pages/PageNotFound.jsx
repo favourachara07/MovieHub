@@ -5,7 +5,7 @@ import PageNotFoundImageLight from "../assets/undraw_page_not_found_re_e9o6 (2).
 import PageNotFoundImageDark from "../assets/undraw_page_not_found_re_e9o6 (3).svg"
 import { useEffect } from "react"
 
-export const PageNotFound = ({ darkMode }) => {
+const PageNotFound = ({ darkMode }) => {
 
   useEffect(()=>{
     document.title=`Page Not Found / MovieHub`
@@ -26,3 +26,4 @@ export const PageNotFound = ({ darkMode }) => {
     </main>
   )
 }
+export default PageNotFound

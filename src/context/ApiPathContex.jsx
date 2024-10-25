@@ -1,8 +1,8 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const ApiPathContext= createContext();
 
-export default function ApiPathProvider({children}){
+function ApiPathProvider({children}){
     const [apipath, setApiPath] = useState("");
     return (
         <ApiPathContext.Provider value={{apipath, setApiPath}}>
@@ -10,3 +10,12 @@ export default function ApiPathProvider({children}){
         </ApiPathContext.Provider>
     )
 }
+function useApiPath(){
+    const context = useContext(ApiPathContext);
+    if (!context) {
+        throw new Error('useApiPath must be used within a ApiPathProvider');
+    }
+    return context;
+}
+
+export {ApiPathProvider, useApiPath};

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom"
 import { useAxios, useTitle } from "../hooks"
 import { Card } from "../components"
 
-export const Search = ({ apiPath }) => {
+const Search = ({ apiPath }) => {
   const [searchParams]=useSearchParams()
   // useearchParams, searchParams give us access to the query parameter in the search bar
   const queryTerm=searchParams.get("q")
@@ -25,3 +25,4 @@ export const Search = ({ apiPath }) => {
     </main>
   )
 }
+export default Search

@@ -1,21 +1,21 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import CondImg from "../assets/geoffrey-moffett-TFRezw7pQwI-unsplash.jpg"
 import { useTitle } from "../hooks"
 
-export const MovieDetail = () => {
+const MovieDetail = () => {
   const params = useParams()
   console.log(params.id)
   const [data, setData] = useState({})
   const image = data.poster_path ? `https://image.tmdb.org/t/p/w500/${data.poster_path}` : CondImg;
   // !image? CondImg:""
   
-  axios.get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=e9fe41fd5626415eb9b028cc98a24587`)
+  useEffect(()=>{axios.get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=e9fe41fd5626415eb9b028cc98a24587`)
     .then(response => setData(response.data))
-    .catch(error => console.error("Error fetching movies:", error));
+    .catch(error => console.error("Error fetching movies:", error));},[params.id])
 
     useTitle(data.title)
 
@@ -72,3 +72,5 @@ export const MovieDetail = () => {
     </main>
   )
 }
+
+export default MovieDetail

@@ -34,18 +34,25 @@ export const Header = ({ darkMode, setDarkMode }) => {
     event.target.reset()
     return navigate(`/search?q=${queryTerm}`)
   }
+  const [program, setProgram] = useState(false);
+  const tvPath = program ? 'series/top_rated' : '/';
+
   return (
     <header>
       {/* nav dark mode: dark:bg-gray-900 */}
       <nav className="bg-white border-b-2 border-gray-200 dark:bg-gray-900 dark:border-b-2 dark:border-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src={Logo} className="h-8" alt="Favour Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">MovieHub</span>
-          </Link>
+            <Link to={tvPath}>
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" onClick={() => setProgram(!program)}>
+                {program ? 'MovieHub' : 'SeriesHub'}
+              </span>
+            </Link>
+          </div>
 
           <div id="mobile-nav" className="flex md:order-2">
-            <button className=" text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1 mr-2" onClick={() => setDarkMode(!darkMode)}>
+            <button className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1 mr-2" onClick={() => setDarkMode(!darkMode)}>
               {/* svg sun */}
               {darkMode ? (<img src={Sun} alt="" />) : (<img src={Moon} alt="" />)}
             </button>
@@ -85,7 +92,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
                 <input type="text" name="search" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." autoComplete="off" />
                 </form>
             </div>
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
+            {program ? (<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
               <li>
                 <NavLink to="/" className={({ isActive }) => isActive ? activeClass : inActiveClass} end>Home</NavLink>
               </li>
@@ -101,7 +108,24 @@ export const Header = ({ darkMode, setDarkMode }) => {
                 {/* dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 */}
                 <NavLink to="/movies/upcoming" className={({ isActive }) => isActive ? activeClass : inActiveClass} >Upcoming</NavLink>
               </li>
-            </ul>
+            </ul>): (<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
+              <li>
+                <NavLink to="/tv" className={({ isActive }) => isActive ? activeClass : inActiveClass} end>Home</NavLink>
+              </li>
+              <li>
+                {/*dark mode for list items= dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 */}
+                <NavLink to="/series/popular" className={({ isActive }) => isActive ? activeClass : inActiveClass} >Popular</NavLink>
+              </li>
+              <li>
+                {/* dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 */}
+                <NavLink to="/series/top_rated" className={({ isActive }) => isActive ? activeClass : inActiveClass} >Top Rated</NavLink>
+              </li>
+              <li>
+                {/* dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 */}
+                <NavLink to="/series/onAir" className={({ isActive }) => isActive ? activeClass : inActiveClass} >On The Air</NavLink>
+              </li>
+            </ul>)}
+            
           </div>
         </div>
       </nav>

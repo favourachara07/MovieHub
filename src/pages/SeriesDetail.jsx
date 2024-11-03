@@ -6,14 +6,14 @@ import axios from "axios"
 import CondImg from "../assets/geoffrey-moffett-TFRezw7pQwI-unsplash.jpg"
 import { useTitle } from "../hooks"
 
-const MovieDetail = () => {
+const SeriesDetail = () => {
   const params = useParams()
   console.log(params.id)
   const [data, setData] = useState({})
   const image = data.poster_path ? `https://image.tmdb.org/t/p/w500/${data.poster_path}` : CondImg;
   // !image? CondImg:""
   
-  useEffect(()=>{axios.get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=e9fe41fd5626415eb9b028cc98a24587`)
+  useEffect(()=>{axios.get(`https://api.themoviedb.org/3/tv/${params.id}?api_key=e9fe41fd5626415eb9b028cc98a24587`)
     .then(response => setData(response.data))
     .catch(error => console.error("Error fetching movies:", error));},[params.id])
 
@@ -73,4 +73,4 @@ const MovieDetail = () => {
   )
 }
 
-export default MovieDetail
+export default SeriesDetail

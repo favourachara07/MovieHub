@@ -10,6 +10,7 @@ const MovieList = ({ apiPath, title }) => {
     // useAxios("...") calls the custom hook, which fetches the data from the API and returns an object with a data property, { data: movies } destructures the object, taking the data property and renaming it to movies.
     const { data: movies, loading, error } = useAxios(apiPath)
     // page title
+    console.log(movies)
     useTitle(title)
     return (
         <main>
@@ -17,6 +18,7 @@ const MovieList = ({ apiPath, title }) => {
                 <div className="flex justify-start flex-wrap sm:justify-evenly">
                     {loading && <Loader />}
                     {!loading && !error && movies.map((movie) => (
+                        
                         <Card key={movie.id} movie={movie} />
                     )) 
                     }

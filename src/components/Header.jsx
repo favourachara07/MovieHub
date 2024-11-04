@@ -4,6 +4,7 @@ import Logo from "../assets/react.svg"
 import Sun from "../assets/sun-fill.svg"
 import Moon from "../assets/moon-fill.svg"
 import { useEffect, useRef, useState } from "react"
+import { useProgram } from "../context/ProgramContext"
 
 export const Header = ({ darkMode, setDarkMode }) => {
   const [hidden, setHidden] = useState(true)
@@ -34,9 +35,9 @@ export const Header = ({ darkMode, setDarkMode }) => {
     event.target.reset()
     return navigate(`/search?q=${queryTerm}`)
   }
-  const [program, setProgram] = useState(false);
-  const tvPath = program ? 'series/top_rated' : '/';
-
+  const {program, setProgram}=useProgram()
+  
+  console.log(program)
   return (
     <header>
       {/* nav dark mode: dark:bg-gray-900 */}
@@ -44,9 +45,9 @@ export const Header = ({ darkMode, setDarkMode }) => {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src={Logo} className="h-8" alt="Favour Logo" />
-            <Link to={tvPath}>
+            <Link to={program ? '/' : '/series'}>
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" onClick={() => setProgram(!program)}>
-                {program ? 'MovieHub' : 'SeriesHub'}
+                {program ? 'SeriesHub' : 'MovieHub'}
               </span>
             </Link>
           </div>
@@ -92,7 +93,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
                 <input type="text" name="search" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." autoComplete="off" />
                 </form>
             </div>
-            {program ? (<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
+            {!program ? (<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
               <li>
                 <NavLink to="/" className={({ isActive }) => isActive ? activeClass : inActiveClass} end>Home</NavLink>
               </li>
@@ -110,7 +111,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
               </li>
             </ul>): (<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-900">
               <li>
-                <NavLink to="/tv" className={({ isActive }) => isActive ? activeClass : inActiveClass} end>Home</NavLink>
+                <NavLink to="/series" className={({ isActive }) => isActive ? activeClass : inActiveClass} end>Home</NavLink>
               </li>
               <li>
                 {/*dark mode for list items= dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 */}
